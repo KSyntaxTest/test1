@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+<style>
+    body {
+        background-color: #eee;
+        color: #111;
+        width: 400px;
+        margin: 16px auto 0 auto;
+        text-align: center;
+        overflow-wrap: normal;
+    }
+    input {
+        padding: 8px;
+        border-radius: 8px;
+        border: 2px solid #555;
+        color: #111;
+    }
+    input:focus {
+        outline: 0;
+    }
+</style>
+
+<body>
+    <input id="gen" type="button" value="生成する">
+    <p id="res"></p>
+</body>
+<script>
+    let p=location.search.slice(1).split("&").map(e=>decodeURI(e)),d={};if(p.length>2&&Number.isInteger(Number(p[0]))&&Number.isInteger(Number(p[1]))){function e(e,l,t){let r=0,i="",n=Array(t).fill("");for(;e>r;){let s=l[n.join(",")],c=s.map(e=>e[1]),f=Math.floor(c.reduce((e,l)=>e+l)*Math.random()),a=-1;for(;f>=0;)f-=c[++a];n.shift(),n.push(s[a][0]),i+=n[0],["。","？","！"].includes(n[0])&&r++}return i}function l(e,l={},t){e=e.replaceAll("。",",".repeat(t-1)+"。").replaceAll("？",",".repeat(t-1)+"？").replaceAll("！",",".repeat(t-1)+"？").split(",");let r=[...Array(t).fill(""),...e];for(let i=0;i<r.length-t;i++){let n=r.slice(i,i+t).join(",");if(l[n]){let s=l[n].findIndex(e=>e[0]==r[i+t]);s>=0?l[n][s]=[r[i+t],l[n][s][1]+1]:l[n].push([r[i+t],1])}else l[n]=[[r[i+t],1]]}}let t=Number(p.shift()),r=Number(p.shift());try{p.forEach(e=>{l(e,d,r)}),document.getElementById("gen").addEventListener("click",()=>{document.getElementById("res").innerText=e(t,d,r)})}catch(i){console.error(i)}}
+</script>
+
+</html>
